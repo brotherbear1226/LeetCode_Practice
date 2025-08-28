@@ -1,0 +1,23 @@
+The problem was to read out each line of phone numbers from a file.
+There are a bunch of different ways to do this but I used extended grep or grep -E
+
+grep -e ^([0-9]{3}-[0-9]{3}-[0-9]{4}|\([0-9]{3}\) [0-9]{3}-[0-9]{4})$
+
+Lets break it down;
+
+the ^ shows the start of the line and the $ shows the end.
+
+[0-9]{3} 
+the 0-9 is any single digit between 0 and 9. 
+the {3} is how many times to repeat so in this case repeat 3 times. 
+
+WHY? we need to repeat it 3 times because of the phone number structure. 
+3 digits - 3 digits and then 4. So we have it search from 0-9 3 times for the first part of the PH number, the 2nd and then we actually set it to 4 for the last section. 
+
+The next section is | \( [0-9]{3} \) [0-9]{3}-[0-9]{4}) 
+
+the | that looks like a pipe is actually the OR symbol in Regex. 
+
+\() part is for a grouping and then escapes with \ as well. So it seems like its looking for literally, the () symbol in the phone number. 
+
+So what this is saying is that  to return if it looks like this; (123) 456-7890 OR this, 123 456-7890
