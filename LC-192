@@ -1,0 +1,29 @@
+Word Frequency - MED
+
+My approach was to use awk for this but you can use others. 
+
+awk reads input line by line. 
+so $1 for example will be line 1 and so on. 
+
+so we need it to loop through each line of the file. 
+
+awk '{
+for (n = 1; n <= NF; n++} {
+print $n
+}
+}' <file name> 
+
+This section right here will just return each line but we need to some how find the occurance of each bit right? 
+
+We use Sort | uniq here. 
+
+
+awk '{ for (i=1; i<=NF; i++) print $i }' words.txt | sort | uniq -c | sort -nr | awk '{ print $2, $1 }'
+
+So we use sort, and then we want to collapse the entries by uniqueness so its not just repeating entries. 
+
+Sort -nr has the flag to sort it numerically vs alphabetically, and reverse the order so the biggest is on top. 
+
+the last awk is just to print everything out. 
+
+
